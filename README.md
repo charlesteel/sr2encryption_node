@@ -24,6 +24,8 @@ sr2encryption.createKey()
 
 Before you can start encrypting data you must create an encryption key within your account. You have the option of adding some additional authentication data in Base64 format to the key that will be created. But it will be needed for all future operations with the key that is created.
 
+The key material is stored on the SR2 Encryption Server securely and cannot be accessed by our team. They are encrypted using the License Secret that you were provided at the start of your service.
+
 ``` js
 var sr2encryption = require('sr2encryption')('yourhost.sr2encryption.com','licenseid','licene secret');
 
@@ -194,6 +196,72 @@ var sr2encryption = require('sr2encryption')('yourhost.sr2encryption.com','licen
 sr2encryption.deleteKey(KeyId)
     .then(function() {
 
+    })
+    .catch(function(err) {
+
+    });
+
+```
+
+## Digital Signatures
+
+Data of all types can be digitally signed by your SR2 Encryption Server. This is done using a unique RSA 4096bit key pair. This can be useful for making sure that data has not been tampered with. You can only sign 64KB of data at a time. We go into how to sign larger amounts of data like files further down.
+
+The advantage of this is you do not have to create and manage the RSA keys yourself. We take care of that using industry best practices.
+
+### Signing Data
+
+``` js
+var sr2encryption = require('sr2encryption')('yourhost.sr2encryption.com','licenseid','licene secret');
+
+var plainttextBuffer = Buffer.from('some data you want to sign', 'utf8');
+
+sr2encryption.signThisData(plainttextBuffer)
+    .then(function(Signature) {
+
+        //Signature: a Base64 string that contains the unique signature for the data in plainttextBuffer
+    })
+    .catch(function(err) {
+
+    });
+
+```
+
+### Signing Data Larger that 64KB
+
+Utilize Node.js's crypto library to hash larger amounts of data and sign the resulting hash.
+
+``` js
+var sr2encryption = require('sr2encryption')('yourhost.sr2encryption.com','licenseid','licene secret');
+var crypto = require('crypto');
+
+var data = //a Buffer object containing a large amount of data
+var hash = crypto.createHash('sha256').update(data).digest();
+
+sr2encryption.signThisData(hash)
+    .then(function(Signature) {
+
+        //Signature: a Base64 string that contains the unique signature for the data in plainttextBuffer
+    })
+    .catch(function(err) {
+
+    });
+
+```
+
+### Verifying A Signature
+
+You can verify that a signature matches a piece of data using your SR2 Encryption Server.
+
+``` js
+var sr2encryption = require('sr2encryption')('yourhost.sr2encryption.com','licenseid','licene secret');
+
+var plainttextBuffer = Buffer.from('some data you want to sign', 'utf8');
+
+sr2encryption.verifyThisSignatureOfThisData(plainttextBuffer, Signature)
+    .then(function(Verified) {
+
+        //Verified: true if the signature provided matches the data.
     })
     .catch(function(err) {
 
