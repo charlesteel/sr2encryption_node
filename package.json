@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/charlesteel/sr2encryption_node/issues"
   },
-  "homepage": "https://github.com/charlesteel/sr2encryption_node#readme"
+  "homepage": "https://github.com/charlesteel/sr2encryption_node#readme",
+  "dependencies": {
+    "request": "^2.88.0"
+  }
 }

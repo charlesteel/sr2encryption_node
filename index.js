@@ -1,38 +1,30 @@
-const https = require('https');
+var request = require('request');
 
-function simpleAuthenticatedPost(host, port, path, headers, requestBody) {
+function simpleAuthenticatedPost(scheme, host, path, headers, requestBody) {
 
     return new Promise(function(resolve, reject) {
 
         var options = {
-            hostname: host,
-            port: port,
-            path: path,
+            uri: scheme + host + path,
             method: 'POST',
-            headers: headers
-        };
-        
-        var req = https.request(options, function(res) {
-            var body = '';
-    
-            res.setEncoding('utf8');
-            
-            res.on('data', function(chunk) {
-                body += chunk;
-            });
-            
-            res.on('end', function() {
-                console.log('Successfully processed HTTPS response');
-                // If we know it's JSON, parse it
-                if (res.headers['content-type'] === 'application/json') {
-                    body = JSON.parse(body);
-                }
+            headers: headers,
+            json: requestBody
+          };
 
+        request(options, function (error, response, body) {
+            if (!error && response.statusCode == 200) {
+                
                 resolve(JSON.parse(body));
-            });
+            }
+            else if(error) {
+
+                reject(error);
+            }
+            else {
+
+                reject(response);
+            }
         });
-        req.write(JSON.stringify(requestBody));
-        req.end();
     });
 }
 
