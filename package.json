@@ -1,0 +1,19 @@
+{
+  "name": "sr2encryption",
+  "version": "1.0.0",
+  "description": "NodeJS module for working with the SR2 Encryption API Service. https://www.sr2solutions.com/encryption",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/charlesteel/sr2encryption_node.git"
+  },
+  "author": "Charles Teel, SR2 Solutions <contact@sr2solutions.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/charlesteel/sr2encryption_node/issues"
+  },
+  "homepage": "https://github.com/charlesteel/sr2encryption_node#readme"
+}
