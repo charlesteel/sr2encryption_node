@@ -216,7 +216,7 @@ method.encryptData = function(KeyId, PlaintextBuffer, AdditionalAuth=undefined) 
     })
 }
 
-method.decryptData = function(KeyId, CipherTextString, AdditionalAuth=undefined) {
+method.decryptData = function(CipherTextString, AdditionalAuth=undefined) {
 
     return new Promise((resolve, reject) => {
 
@@ -233,7 +233,6 @@ method.decryptData = function(KeyId, CipherTextString, AdditionalAuth=undefined)
         }
 
         var body = {
-            KeyId: KeyId,
             CipherText: CipherTextString
         };
 
