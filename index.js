@@ -15,7 +15,7 @@ function simpleAuthenticatedPost(scheme, host, path, headers, requestBody) {
 
             if (!error && response.statusCode == 200) {
                 
-                resolve(JSON.parse(body));
+                resolve(body);
             }
             else if(error) {
 
