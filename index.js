@@ -2,7 +2,7 @@ var request = require('request');
 
 function simpleAuthenticatedPost(scheme, host, path, headers, requestBody) {
 
-    return new Promise(function(resolve, reject) {
+    return new Promise((resolve, reject) => {
 
         var options = {
             uri: scheme + host + path,
@@ -11,7 +11,8 @@ function simpleAuthenticatedPost(scheme, host, path, headers, requestBody) {
             json: requestBody
           };
 
-        request(options, function (error, response, body) {
+        request(options, (error, response, body) => {
+
             if (!error && response.statusCode == 200) {
                 
                 resolve(JSON.parse(body));
@@ -40,7 +41,7 @@ function Sr2Encryption(host, licenseId, licenseKey) {
 
 method.createKey = function(additionalAuth=undefined) {
 
-    return new Promise(function(resolve, reject) {
+    return new Promise((resolve, reject) => {
 
         var headers = {
 
@@ -57,7 +58,7 @@ method.createKey = function(additionalAuth=undefined) {
         }
 
         simpleAuthenticatedPost(this._scheme, this._host, '/aes/createkey', headers, body)
-            .then(function(response) {
+            .then((response) => {
 
                 if(response.status == 'success') {
 
@@ -68,7 +69,7 @@ method.createKey = function(additionalAuth=undefined) {
                     reject(response);
                 }
             })
-            .catch(function(err) {
+            .catch((err) => {
 
                 resolve(err);
             });
@@ -77,7 +78,7 @@ method.createKey = function(additionalAuth=undefined) {
 
 method.listKeys = function() {
 
-    return new Promise(function(resolve, reject) {
+    return new Promise((resolve, reject) => {
 
         var headers = {
 
@@ -89,7 +90,7 @@ method.listKeys = function() {
         var body = {};
 
         simpleAuthenticatedPost(this._scheme, this._host, '/aes/listkeys', headers, body)
-            .then(function(response) {
+            .then((response) => {
 
                 if(response.status == 'success') {
 
@@ -100,7 +101,7 @@ method.listKeys = function() {
                     reject(response);
                 }
             })
-            .catch(function(err) {
+            .catch((err) => {
 
                 resolve(err);
             });
@@ -109,7 +110,7 @@ method.listKeys = function() {
 
 method.deactivateKey = function(KeyId) {
 
-    return new Promise(function(resolve, reject) {
+    return new Promise((resolve, reject) => {
 
         var headers = {
 
@@ -123,7 +124,7 @@ method.deactivateKey = function(KeyId) {
         };
 
         simpleAuthenticatedPost(this._scheme, this._host, '/aes/deactivatekey', headers, body)
-            .then(function(response) {
+            .then((response) => {
 
                 if(response.status == 'success') {
 
@@ -134,7 +135,7 @@ method.deactivateKey = function(KeyId) {
                     reject(response);
                 }
             })
-            .catch(function(err) {
+            .catch((err) => {
 
                 resolve(err);
             });
@@ -143,7 +144,7 @@ method.deactivateKey = function(KeyId) {
 
 method.deleteKey = function(KeyId) {
 
-    return new Promise(function(resolve, reject) {
+    return new Promise((resolve, reject) => {
 
         var headers = {
 
@@ -157,7 +158,7 @@ method.deleteKey = function(KeyId) {
         };
 
         simpleAuthenticatedPost(this._scheme, this._host, '/aes/deletekey', headers, body)
-            .then(function(response) {
+            .then((response) => {
 
                 if(response.status == 'success') {
 
@@ -168,7 +169,7 @@ method.deleteKey = function(KeyId) {
                     reject(response);
                 }
             })
-            .catch(function(err) {
+            .catch((err) => {
 
                 resolve(err);
             });
@@ -177,7 +178,7 @@ method.deleteKey = function(KeyId) {
 
 method.encryptData = function(KeyId, PlaintextBuffer, AdditionalAuth=undefined) {
 
-    return new Promise(function(resolve, reject) {
+    return new Promise((resolve, reject) => {
 
         var headers = {
 
@@ -197,7 +198,7 @@ method.encryptData = function(KeyId, PlaintextBuffer, AdditionalAuth=undefined) 
         };
 
         simpleAuthenticatedPost(this._scheme, this._host, '/aes/encrypt', headers, body)
-            .then(function(response) {
+            .then((response) => {
 
                 if(response.status == 'success') {
 
@@ -208,7 +209,7 @@ method.encryptData = function(KeyId, PlaintextBuffer, AdditionalAuth=undefined) 
                     reject(response);
                 }
             })
-            .catch(function(err) {
+            .catch((err) => {
 
                 resolve(err);
             });
@@ -217,7 +218,7 @@ method.encryptData = function(KeyId, PlaintextBuffer, AdditionalAuth=undefined) 
 
 method.decryptData = function(KeyId, CipherTextString, AdditionalAuth=undefined) {
 
-    return new Promise(function(resolve, reject) {
+    return new Promise((resolve, reject) => {
 
         var headers = {
 
@@ -237,7 +238,7 @@ method.decryptData = function(KeyId, CipherTextString, AdditionalAuth=undefined)
         };
 
         simpleAuthenticatedPost(this._scheme, this._host, '/aes/decrypt', headers, body)
-            .then(function(response) {
+            .then((response) => {
 
                 if(response.status == 'success') {
 
@@ -248,7 +249,7 @@ method.decryptData = function(KeyId, CipherTextString, AdditionalAuth=undefined)
                     reject(response);
                 }
             })
-            .catch(function(err) {
+            .catch((err) => {
 
                 resolve(err);
             });
@@ -257,7 +258,7 @@ method.decryptData = function(KeyId, CipherTextString, AdditionalAuth=undefined)
 
 method.reEncryptData = function(CipherTextString, DestinationKeyId, DestinationAdditionalAuth=undefined, SourceAdditionalAuth=undefined) {
 
-    return new Promise(function(resolve, reject) {
+    return new Promise((resolve, reject) => {
 
         var headers = {
 
@@ -282,7 +283,7 @@ method.reEncryptData = function(CipherTextString, DestinationKeyId, DestinationA
         }
 
         simpleAuthenticatedPost(this._scheme, this._host, '/aes/reencrypt', headers, body)
-            .then(function(response) {
+            .then((response) => {
 
                 if(response.status == 'success') {
 
@@ -293,7 +294,7 @@ method.reEncryptData = function(CipherTextString, DestinationKeyId, DestinationA
                     reject(response);
                 }
             })
-            .catch(function(err) {
+            .catch((err) => {
 
                 resolve(err);
             });
@@ -302,7 +303,7 @@ method.reEncryptData = function(CipherTextString, DestinationKeyId, DestinationA
 
 method.generateRandomData = function(DataLength) {
 
-    return new Promise(function(resolve, reject) {
+    return new Promise((resolve, reject) => {
 
         var headers = {
 
@@ -316,7 +317,7 @@ method.generateRandomData = function(DataLength) {
         };
 
         simpleAuthenticatedPost(this._scheme, this._host, '/aes/generateRandomData', headers, body)
-            .then(function(response) {
+            .then((response) => {
 
                 if(response.status == 'success') {
 
@@ -327,7 +328,7 @@ method.generateRandomData = function(DataLength) {
                     reject(response);
                 }
             })
-            .catch(function(err) {
+            .catch((err) => {
 
                 resolve(err);
             });
@@ -336,7 +337,7 @@ method.generateRandomData = function(DataLength) {
 
 method.generateKeyData = function(KeyId, AdditionalAuth=undefined) {
 
-    return new Promise(function(resolve, reject) {
+    return new Promise((resolve, reject) => {
 
         var headers = {
 
@@ -355,7 +356,7 @@ method.generateKeyData = function(KeyId, AdditionalAuth=undefined) {
         };
 
         simpleAuthenticatedPost(this._scheme, this._host, '/aes/generateKeyData', headers, body)
-            .then(function(response) {
+            .then((response) => {
 
                 if(response.status == 'success') {
 
@@ -366,7 +367,7 @@ method.generateKeyData = function(KeyId, AdditionalAuth=undefined) {
                     reject(response);
                 }
             })
-            .catch(function(err) {
+            .catch((err) => {
 
                 resolve(err);
             });
@@ -375,7 +376,7 @@ method.generateKeyData = function(KeyId, AdditionalAuth=undefined) {
 
 method.generateKeyDataWithoutPlaintext = function(KeyId, AdditionalAuth=undefined) {
 
-    return new Promise(function(resolve, reject) {
+    return new Promise((resolve, reject) => {
 
         var headers = {
 
@@ -394,7 +395,7 @@ method.generateKeyDataWithoutPlaintext = function(KeyId, AdditionalAuth=undefine
         };
 
         simpleAuthenticatedPost(this._scheme, this._host, '/aes/generateKeyDataWithoutPlaintext', headers, body)
-            .then(function(response) {
+            .then((response) => {
 
                 if(response.status == 'success') {
 
@@ -405,7 +406,7 @@ method.generateKeyDataWithoutPlaintext = function(KeyId, AdditionalAuth=undefine
                     reject(response);
                 }
             })
-            .catch(function(err) {
+            .catch((err) => {
 
                 resolve(err);
             });
@@ -414,7 +415,7 @@ method.generateKeyDataWithoutPlaintext = function(KeyId, AdditionalAuth=undefine
 
 method.signThisData = function(PlaintextBuffer) {
 
-    return new Promise(function(resolve, reject) {
+    return new Promise((resolve, reject) => {
 
         var headers = {
 
@@ -428,7 +429,7 @@ method.signThisData = function(PlaintextBuffer) {
         };
 
         simpleAuthenticatedPost(this._scheme, this._host, '/des/sign', headers, body)
-            .then(function(response) {
+            .then((response) => {
 
                 if(response.status == 'success') {
 
@@ -439,7 +440,7 @@ method.signThisData = function(PlaintextBuffer) {
                     reject(response);
                 }
             })
-            .catch(function(err) {
+            .catch((err) => {
 
                 resolve(err);
             });
@@ -448,7 +449,7 @@ method.signThisData = function(PlaintextBuffer) {
 
 method.verifyThisSignatureOfThisData = function(PlaintextBuffer, SignatureString) {
 
-    return new Promise(function(resolve, reject) {
+    return new Promise((resolve, reject) => {
 
         var headers = {
 
@@ -461,7 +462,7 @@ method.verifyThisSignatureOfThisData = function(PlaintextBuffer, SignatureString
         };
 
         simpleAuthenticatedPost(this._scheme, this._host, '/des/verify', headers, body)
-            .then(function(response) {
+            .then((response) => {
 
                 if(response.status == 'success') {
 
@@ -472,7 +473,7 @@ method.verifyThisSignatureOfThisData = function(PlaintextBuffer, SignatureString
                     reject(response);
                 }
             })
-            .catch(function(err) {
+            .catch((err) => {
 
                 resolve(err);
             });
