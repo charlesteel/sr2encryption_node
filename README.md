@@ -121,9 +121,9 @@ Additionally, you can request just the encrypted copy of the key for storage onl
 var sr2encryption = require('sr2encryption')('yourhost.sr2encryption.com','licenseid','licene secret');
 
 sr2encryption.generateKeyDataWithoutPlaintext(KeyId)
-    .then(function(Plaintext) {
+    .then(function(CipherText) {
 
-        //Plaintext: Base64 string with the unencrypted AES 256bit encryption key that can be used with Node.js crypto.
+        //CipherText: Base64 string with a key that was encrypted using the specified KeyId
     })
     .catch(function(err) {
 
