@@ -20,6 +20,14 @@ sr2encryption.createKey()
     });
 ```
 
+## Free Demonstration
+
+You can also utilize a free demonstration mode to test the SR2 Encryption service by using the below credentials. Please note, this is a shared system and encryption and decryption can be used by everyone. So this is not intended for a production environment.
+
+``` js
+var sr2encryption = require('sr2encryption')('demo.sr2encryption.com', '15f264a7-c844-4324-b58b-57df2e945c8e', 'Ne+XlrLXAxx2kALp6dnEE3tKllC0VKB8VGApOdiGhW3j1cwrfQ6/lktVCsBVCbnJCGTJmB8fDtooF5dpbV/xMQ==');
+```
+
 ## Create Your First Encryption Key
 
 Before you can start encrypting data you must create an encryption key within your account. You have the option of adding some additional authentication data in Base64 format to the key that will be created. But it will be needed for all future operations with the key that is created.
