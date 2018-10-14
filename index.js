@@ -359,7 +359,7 @@ method.generateKeyData = function(KeyId, AdditionalAuth=undefined) {
 
                 if(response.status == 'success') {
 
-                    resolve({ CipherText: response['CipherText'], Plaintext: response['CipherText'] });
+                    resolve({ CipherText: response['CipherText'], Plaintext: response['Plaintext'] });
                 }
                 else {
 

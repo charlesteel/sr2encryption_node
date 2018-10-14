@@ -1,6 +1,6 @@
 {
   "name": "sr2encryption",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "NodeJS module for working with the SR2 Encryption API Service. https://www.sr2solutions.com/encryption",
   "main": "index.js",
   "scripts": {
