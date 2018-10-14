@@ -14,7 +14,7 @@ function simpleAuthenticatedPost(scheme, host, path, headers, requestBody) {
         request(options, (error, response, body) => {
 
             if (!error && response.statusCode == 200) {
-                
+
                 resolve(body);
             }
             else if(error) {
@@ -427,7 +427,7 @@ method.signThisData = function(PlaintextBuffer) {
             Plaintext: PlaintextBuffer.toString('base64')
         };
 
-        simpleAuthenticatedPost(this._scheme, this._host, '/des/sign', headers, body)
+        simpleAuthenticatedPost(this._scheme, this._host, '/dsa/sign', headers, body)
             .then((response) => {
 
                 if(response.status == 'success') {
@@ -460,7 +460,7 @@ method.verifyThisSignatureOfThisData = function(PlaintextBuffer, SignatureString
             Signature: SignatureString
         };
 
-        simpleAuthenticatedPost(this._scheme, this._host, '/des/verify', headers, body)
+        simpleAuthenticatedPost(this._scheme, this._host, '/dsa/verify', headers, body)
             .then((response) => {
 
                 if(response.status == 'success') {
