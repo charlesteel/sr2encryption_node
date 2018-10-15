@@ -4,6 +4,11 @@ function simpleAuthenticatedPost(scheme, host, path, headers, requestBody) {
 
     return new Promise((resolve, reject) => {
 
+        if(host == 'demo.sr2encryption.com') {
+
+            console.log("SR2 Encryption Warning: Using SR2 Encryption Demo Server. THIS IS NOT SECURE IN PRODUCTION ENVIRONMENTS!!!")
+        }
+
         var options = {
             uri: scheme + host + path,
             method: 'POST',
@@ -71,7 +76,7 @@ method.createKey = function(additionalAuth=undefined) {
             })
             .catch((err) => {
 
-                resolve(err);
+                reject(err);
             });
     })
 }
@@ -103,7 +108,7 @@ method.listKeys = function() {
             })
             .catch((err) => {
 
-                resolve(err);
+                reject(err);
             });
     })
 }
@@ -137,7 +142,7 @@ method.deactivateKey = function(KeyId) {
             })
             .catch((err) => {
 
-                resolve(err);
+                reject(err);
             });
     })
 }
@@ -171,7 +176,7 @@ method.deleteKey = function(KeyId) {
             })
             .catch((err) => {
 
-                resolve(err);
+                reject(err);
             });
     })
 }
@@ -211,7 +216,7 @@ method.encryptData = function(KeyId, PlaintextBuffer, AdditionalAuth=undefined) 
             })
             .catch((err) => {
 
-                resolve(err);
+                reject(err);
             });
     })
 }
@@ -250,7 +255,7 @@ method.decryptData = function(CipherTextString, AdditionalAuth=undefined) {
             })
             .catch((err) => {
 
-                resolve(err);
+                reject(err);
             });
     })
 }
@@ -295,7 +300,7 @@ method.reEncryptData = function(CipherTextString, DestinationKeyId, DestinationA
             })
             .catch((err) => {
 
-                resolve(err);
+                reject(err);
             });
     })
 }
@@ -329,7 +334,7 @@ method.generateRandomData = function(DataLength) {
             })
             .catch((err) => {
 
-                resolve(err);
+                reject(err);
             });
     })
 }
@@ -368,7 +373,7 @@ method.generateKeyData = function(KeyId, AdditionalAuth=undefined) {
             })
             .catch((err) => {
 
-                resolve(err);
+                reject(err);
             });
     })
 }
@@ -407,7 +412,7 @@ method.generateKeyDataWithoutPlaintext = function(KeyId, AdditionalAuth=undefine
             })
             .catch((err) => {
 
-                resolve(err);
+                reject(err);
             });
     })
 }
@@ -441,7 +446,7 @@ method.signThisData = function(PlaintextBuffer) {
             })
             .catch((err) => {
 
-                resolve(err);
+                reject(err);
             });
     })
 }
@@ -474,7 +479,7 @@ method.verifyThisSignatureOfThisData = function(PlaintextBuffer, SignatureString
             })
             .catch((err) => {
 
-                resolve(err);
+                reject(err);
             });
     })
 }
@@ -482,4 +487,9 @@ method.verifyThisSignatureOfThisData = function(PlaintextBuffer, SignatureString
 module.exports = function(host, licenseId, licenseKey) {
 
     return new Sr2Encryption(host, licenseId, licenseKey);
+}
+
+module.exports = function() {
+
+    return new Sr2Encryption('demo.sr2encryption.com', '15f264a7-c844-4324-b58b-57df2e945c8e', 'Ne+XlrLXAxx2kALp6dnEE3tKllC0VKB8VGApOdiGhW3j1cwrfQ6/lktVCsBVCbnJCGTJmB8fDtooF5dpbV/xMQ==');
 }
